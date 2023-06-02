@@ -1,0 +1,257 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "annotations": {
+      "tke.cloud.tencent.com/networks-status": "[{\n    \"name\": \"tke-bridge\",\n    \"interface\": \"eth0\",\n    \"ips\": [\n        \"192.168.0.173\"\n    ],\n    \"mac\": \"fe:aa:2c:63:30:20\",\n    \"default\": true,\n    \"dns\": {}\n}]"
+    },
+    "creationTimestamp": "2023-06-01T11:48:54Z",
+    "generateName": "pod-cpu-hog-helper-",
+    "labels": {
+      "app": "pod-cpu-hog-helper-zzewc0",
+      "app.kubernetes.io/component": "experiment-job",
+      "app.kubernetes.io/part-of": "litmus",
+      "app.kubernetes.io/runtime-api-usage": "true",
+      "app.kubernetes.io/version": "latest",
+      "chaosUID": "2412a6b5-9e36-4c26-a319-547ef7400738",
+      "name": "pod-cpu-hog"
+    },
+    "name": "pod-cpu-hog-helper-mptz5",
+    "namespace": "litmus",
+    "resourceVersion": "3447089598",
+    "uid": "dcfdfac2-0c4d-4308-ae65-43ac0990fee7"
+  },
+  "spec": {
+    "containers": [
+      {
+        "args": [
+          "-c",
+          "./helpers -name stress-chaos"
+        ],
+        "command": [
+          "/bin/bash"
+        ],
+        "env": [
+          {
+            "name": "TARGETS",
+            "value": "busybox-deployment-6cd5ff56bd-2nrm2:litmus:busybox"
+          },
+          {
+            "name": "TOTAL_CHAOS_DURATION",
+            "value": "3600"
+          },
+          {
+            "name": "CHAOS_NAMESPACE",
+            "value": "litmus"
+          },
+          {
+            "name": "CHAOSENGINE",
+            "value": "pod-cpu-hog-zb5h62vr"
+          },
+          {
+            "name": "CHAOS_UID",
+            "value": "2412a6b5-9e36-4c26-a319-547ef7400738"
+          },
+          {
+            "name": "CONTAINER_RUNTIME",
+            "value": "containerd"
+          },
+          {
+            "name": "EXPERIMENT_NAME",
+            "value": "pod-cpu-hog"
+          },
+          {
+            "name": "SOCKET_PATH",
+            "value": "/run/containerd/containerd.sock"
+          },
+          {
+            "name": "CPU_CORES",
+            "value": "1"
+          },
+          {
+            "name": "CPU_LOAD",
+            "value": "100"
+          },
+          {
+            "name": "STRESS_TYPE",
+            "value": "pod-cpu-stress"
+          },
+          {
+            "name": "POD_NAME",
+            "valueFrom": {
+              "fieldRef": {
+                "apiVersion": "v1",
+                "fieldPath": "metadata.name"
+              }
+            }
+          }
+        ],
+        "image": "litmuschaos/go-runner:latest",
+        "imagePullPolicy": "Always",
+        "name": "pod-cpu-hog",
+        "resources": {},
+        "securityContext": {
+          "capabilities": {
+            "add": [
+              "SYS_ADMIN"
+            ]
+          },
+          "privileged": true,
+          "runAsUser": 0
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/run/containerd/containerd.sock",
+            "name": "socket-path"
+          },
+          {
+            "mountPath": "/sys",
+            "name": "sys-path"
+          },
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "kube-api-access-crwv4",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "hostPID": true,
+    "nodeName": "172.16.20.13",
+    "preemptionPolicy": "PreemptLowerPriority",
+    "priority": 0,
+    "restartPolicy": "Never",
+    "schedulerName": "default-scheduler",
+    "securityContext": {},
+    "serviceAccount": "litmus-admin",
+    "serviceAccountName": "litmus-admin",
+    "terminationGracePeriodSeconds": 0,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ],
+    "volumes": [
+      {
+        "hostPath": {
+          "path": "/run/containerd/containerd.sock",
+          "type": ""
+        },
+        "name": "socket-path"
+      },
+      {
+        "hostPath": {
+          "path": "/sys",
+          "type": ""
+        },
+        "name": "sys-path"
+      },
+      {
+        "name": "kube-api-access-crwv4",
+        "projected": {
+          "defaultMode": 420,
+          "sources": [
+            {
+              "serviceAccountToken": {
+                "expirationSeconds": 3607,
+                "path": "token"
+              }
+            },
+            {
+              "configMap": {
+                "items": [
+                  {
+                    "key": "ca.crt",
+                    "path": "ca.crt"
+                  }
+                ],
+                "name": "kube-root-ca.crt"
+              }
+            },
+            {
+              "downwardAPI": {
+                "items": [
+                  {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "metadata.namespace"
+                    },
+                    "path": "namespace"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2023-06-01T11:48:54Z",
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2023-06-01T11:48:56Z",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2023-06-01T11:48:56Z",
+        "status": "True",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2023-06-01T11:48:54Z",
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "containerID": "containerd://2759c6eac42ecd2a85db5edd139d4c8af0f8c8c08a3535866ac123bfd1b49e02",
+        "image": "docker.io/litmuschaos/go-runner:latest",
+        "imageID": "docker.io/litmuschaos/go-runner@sha256:9e58b76db5fc501aaa66b346d408c49acef3eefefbbba86dd6bbef49204b0932",
+        "lastState": {},
+        "name": "pod-cpu-hog",
+        "ready": true,
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2023-06-01T11:48:55Z"
+          }
+        }
+      }
+    ],
+    "hostIP": "172.16.20.13",
+    "phase": "Running",
+    "podIP": "192.168.0.173",
+    "podIPs": [
+      {
+        "ip": "192.168.0.173"
+      }
+    ],
+    "qosClass": "BestEffort",
+    "startTime": "2023-06-01T11:48:54Z"
+  }
+}
