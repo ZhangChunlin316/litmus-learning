@@ -1,257 +1,1176 @@
 {
   "apiVersion": "v1",
-  "kind": "Pod",
-  "metadata": {
-    "annotations": {
-      "tke.cloud.tencent.com/networks-status": "[{\n    \"name\": \"tke-bridge\",\n    \"interface\": \"eth0\",\n    \"ips\": [\n        \"192.168.0.173\"\n    ],\n    \"mac\": \"fe:aa:2c:63:30:20\",\n    \"default\": true,\n    \"dns\": {}\n}]"
-    },
-    "creationTimestamp": "2023-06-01T11:48:54Z",
-    "generateName": "pod-cpu-hog-helper-",
-    "labels": {
-      "app": "pod-cpu-hog-helper-zzewc0",
-      "app.kubernetes.io/component": "experiment-job",
-      "app.kubernetes.io/part-of": "litmus",
-      "app.kubernetes.io/runtime-api-usage": "true",
-      "app.kubernetes.io/version": "latest",
-      "chaosUID": "2412a6b5-9e36-4c26-a319-547ef7400738",
-      "name": "pod-cpu-hog"
-    },
-    "name": "pod-cpu-hog-helper-mptz5",
-    "namespace": "litmus",
-    "resourceVersion": "3447089598",
-    "uid": "dcfdfac2-0c4d-4308-ae65-43ac0990fee7"
-  },
-  "spec": {
-    "containers": [
-      {
-        "args": [
-          "-c",
-          "./helpers -name stress-chaos"
-        ],
-        "command": [
-          "/bin/bash"
-        ],
-        "env": [
-          {
-            "name": "TARGETS",
-            "value": "busybox-deployment-6cd5ff56bd-2nrm2:litmus:busybox"
-          },
-          {
-            "name": "TOTAL_CHAOS_DURATION",
-            "value": "3600"
-          },
-          {
-            "name": "CHAOS_NAMESPACE",
-            "value": "litmus"
-          },
-          {
-            "name": "CHAOSENGINE",
-            "value": "pod-cpu-hog-zb5h62vr"
-          },
-          {
-            "name": "CHAOS_UID",
-            "value": "2412a6b5-9e36-4c26-a319-547ef7400738"
-          },
-          {
-            "name": "CONTAINER_RUNTIME",
-            "value": "containerd"
-          },
-          {
-            "name": "EXPERIMENT_NAME",
-            "value": "pod-cpu-hog"
-          },
-          {
-            "name": "SOCKET_PATH",
-            "value": "/run/containerd/containerd.sock"
-          },
-          {
-            "name": "CPU_CORES",
-            "value": "1"
-          },
-          {
-            "name": "CPU_LOAD",
-            "value": "100"
-          },
-          {
-            "name": "STRESS_TYPE",
-            "value": "pod-cpu-stress"
-          },
-          {
-            "name": "POD_NAME",
-            "valueFrom": {
-              "fieldRef": {
-                "apiVersion": "v1",
-                "fieldPath": "metadata.name"
-              }
-            }
-          }
-        ],
-        "image": "litmuschaos/go-runner:latest",
-        "imagePullPolicy": "Always",
-        "name": "pod-cpu-hog",
-        "resources": {},
-        "securityContext": {
-          "capabilities": {
-            "add": [
-              "SYS_ADMIN"
-            ]
-          },
-          "privileged": true,
-          "runAsUser": 0
+  "items": [
+    {
+      "apiVersion": "argoproj.io/v1alpha1",
+      "kind": "Workflow",
+      "metadata": {
+        "annotations": {
+          "workflows.argoproj.io/pod-name-format": "v1"
         },
-        "terminationMessagePath": "/dev/termination-log",
-        "terminationMessagePolicy": "File",
-        "volumeMounts": [
-          {
-            "mountPath": "/run/containerd/containerd.sock",
-            "name": "socket-path"
-          },
-          {
-            "mountPath": "/sys",
-            "name": "sys-path"
-          },
-          {
-            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-            "name": "kube-api-access-crwv4",
-            "readOnly": true
-          }
-        ]
-      }
-    ],
-    "dnsPolicy": "ClusterFirst",
-    "enableServiceLinks": true,
-    "hostPID": true,
-    "nodeName": "172.16.20.13",
-    "preemptionPolicy": "PreemptLowerPriority",
-    "priority": 0,
-    "restartPolicy": "Never",
-    "schedulerName": "default-scheduler",
-    "securityContext": {},
-    "serviceAccount": "litmus-admin",
-    "serviceAccountName": "litmus-admin",
-    "terminationGracePeriodSeconds": 0,
-    "tolerations": [
-      {
-        "effect": "NoExecute",
-        "key": "node.kubernetes.io/not-ready",
-        "operator": "Exists",
-        "tolerationSeconds": 300
-      },
-      {
-        "effect": "NoExecute",
-        "key": "node.kubernetes.io/unreachable",
-        "operator": "Exists",
-        "tolerationSeconds": 300
-      }
-    ],
-    "volumes": [
-      {
-        "hostPath": {
-          "path": "/run/containerd/containerd.sock",
-          "type": ""
+        "creationTimestamp": "2023-06-01T11:37:33Z",
+        "generation": 6,
+        "labels": {
+          "cluster_id": "8dbb4e7c-bdea-4b63-85fd-898aebc8344b",
+          "executed_by": "YWRtaW4",
+          "subject": "blueszzhang_litmus",
+          "workflow_id": "845a395e-cdda-4d74-8e40-d8b4bd300190",
+          "workflows.argoproj.io/completed": "true",
+          "workflows.argoproj.io/controller-instanceid": "8dbb4e7c-bdea-4b63-85fd-898aebc8344b",
+          "workflows.argoproj.io/phase": "Succeeded"
         },
-        "name": "socket-path"
+        "name": "blueszzhang-1685619444",
+        "namespace": "litmus",
+        "resourceVersion": "3446823660",
+        "uid": "f3425a09-3896-42e4-81b9-a2f197c85979"
       },
-      {
-        "hostPath": {
-          "path": "/sys",
-          "type": ""
-        },
-        "name": "sys-path"
-      },
-      {
-        "name": "kube-api-access-crwv4",
-        "projected": {
-          "defaultMode": 420,
-          "sources": [
+      "spec": {
+        "arguments": {
+          "parameters": [
             {
-              "serviceAccountToken": {
-                "expirationSeconds": 3607,
-                "path": "token"
-              }
-            },
-            {
-              "configMap": {
-                "items": [
-                  {
-                    "key": "ca.crt",
-                    "path": "ca.crt"
-                  }
-                ],
-                "name": "kube-root-ca.crt"
-              }
-            },
-            {
-              "downwardAPI": {
-                "items": [
-                  {
-                    "fieldRef": {
-                      "apiVersion": "v1",
-                      "fieldPath": "metadata.namespace"
-                    },
-                    "path": "namespace"
-                  }
-                ]
-              }
+              "name": "adminModeNamespace",
+              "value": "litmus"
             }
           ]
-        }
-      }
-    ]
-  },
-  "status": {
-    "conditions": [
-      {
-        "lastProbeTime": null,
-        "lastTransitionTime": "2023-06-01T11:48:54Z",
-        "status": "True",
-        "type": "Initialized"
-      },
-      {
-        "lastProbeTime": null,
-        "lastTransitionTime": "2023-06-01T11:48:56Z",
-        "status": "True",
-        "type": "Ready"
-      },
-      {
-        "lastProbeTime": null,
-        "lastTransitionTime": "2023-06-01T11:48:56Z",
-        "status": "True",
-        "type": "ContainersReady"
-      },
-      {
-        "lastProbeTime": null,
-        "lastTransitionTime": "2023-06-01T11:48:54Z",
-        "status": "True",
-        "type": "PodScheduled"
-      }
-    ],
-    "containerStatuses": [
-      {
-        "containerID": "containerd://2759c6eac42ecd2a85db5edd139d4c8af0f8c8c08a3535866ac123bfd1b49e02",
-        "image": "docker.io/litmuschaos/go-runner:latest",
-        "imageID": "docker.io/litmuschaos/go-runner@sha256:9e58b76db5fc501aaa66b346d408c49acef3eefefbbba86dd6bbef49204b0932",
-        "lastState": {},
-        "name": "pod-cpu-hog",
-        "ready": true,
-        "restartCount": 0,
-        "started": true,
-        "state": {
-          "running": {
-            "startedAt": "2023-06-01T11:48:55Z"
+        },
+        "entrypoint": "custom-chaos",
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 1000
+        },
+        "serviceAccountName": "argo-chaos",
+        "templates": [
+          {
+            "inputs": {},
+            "metadata": {},
+            "name": "custom-chaos",
+            "outputs": {},
+            "steps": [
+              [
+                {
+                  "arguments": {},
+                  "name": "install-chaos-experiments",
+                  "template": "install-chaos-experiments"
+                }
+              ],
+              [
+                {
+                  "arguments": {},
+                  "name": "pod-cpu-hog-zus",
+                  "template": "pod-cpu-hog-zus"
+                }
+              ]
+            ]
+          },
+          {
+            "container": {
+              "args": [
+                "kubectl apply -f /tmp/pod-cpu-hog-zus.yaml -n {{workflow.parameters.adminModeNamespace}} \u0026\u0026  sleep 30"
+              ],
+              "command": [
+                "sh",
+                "-c"
+              ],
+              "image": "litmuschaos/k8s:2.14.0",
+              "name": "",
+              "resources": {}
+            },
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-zus",
+                  "path": "/tmp/pod-cpu-hog-zus.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\ndescription:\n  message: |\n    Injects cpu consumption on pods belonging to an app deployment\nkind: ChaosExperiment\nmetadata:\n  name: pod-cpu-hog\n  labels:\n    name: pod-cpu-hog\n    app.kubernetes.io/part-of: litmus\n    app.kubernetes.io/component: chaosexperiment\n    app.kubernetes.io/version: latest\nspec:\n  definition:\n    scope: Namespaced\n    permissions:\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods\n        verbs:\n          - create\n          - delete\n          - get\n          - list\n          - patch\n          - update\n          - deletecollection\n      - apiGroups:\n          - \"\"\n        resources:\n          - events\n        verbs:\n          - create\n          - get\n          - list\n          - patch\n          - update\n      - apiGroups:\n          - \"\"\n        resources:\n          - configmaps\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/log\n        verbs:\n          - get\n          - list\n          - watch\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/exec\n        verbs:\n          - get\n          - list\n          - create\n      - apiGroups:\n          - apps\n        resources:\n          - deployments\n          - statefulsets\n          - replicasets\n          - daemonsets\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - apps.openshift.io\n        resources:\n          - deploymentconfigs\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - \"\"\n        resources:\n          - replicationcontrollers\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - argoproj.io\n        resources:\n          - rollouts\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - batch\n        resources:\n          - jobs\n        verbs:\n          - create\n          - list\n          - get\n          - delete\n          - deletecollection\n      - apiGroups:\n          - litmuschaos.io\n        resources:\n          - chaosengines\n          - chaosexperiments\n          - chaosresults\n        verbs:\n          - create\n          - list\n          - get\n          - patch\n          - update\n          - delete\n    image: litmuschaos/go-runner:latest\n    imagePullPolicy: Always\n    args:\n      - -c\n      - ./experiments -name pod-cpu-hog\n    command:\n      - /bin/bash\n    env:\n      - name: TOTAL_CHAOS_DURATION\n        value: \"60\"\n      - name: CPU_CORES\n        value: \"1\"\n      - name: CPU_LOAD\n        value: \"100\"\n      - name: PODS_AFFECTED_PERC\n        value: \"\"\n      - name: RAMP_TIME\n        value: \"\"\n      - name: LIB_IMAGE\n        value: litmuschaos/go-runner:latest\n      - name: STRESS_IMAGE\n        value: alexeiled/stress-ng:latest-ubuntu\n      - name: CONTAINER_RUNTIME\n        value: containerd\n      - name: SOCKET_PATH\n        value: /run/containerd/containerd.sock\n      - name: TARGET_PODS\n        value: \"\"\n      - name: NODE_LABEL\n        value: \"\"\n      - name: SEQUENCE\n        value: parallel\n    labels:\n      name: pod-cpu-hog\n      app.kubernetes.io/part-of: litmus\n      app.kubernetes.io/component: experiment-job\n      app.kubernetes.io/runtime-api-usage: \"true\"\n      app.kubernetes.io/version: latest\n"
+                  }
+                }
+              ]
+            },
+            "metadata": {},
+            "name": "install-chaos-experiments",
+            "outputs": {}
+          },
+          {
+            "container": {
+              "args": [
+                "-file=/tmp/chaosengine-pod-cpu-hog-zus.yaml",
+                "-saveName=/tmp/engine-name"
+              ],
+              "image": "litmuschaos/litmus-checker:2.14.0",
+              "name": "",
+              "resources": {}
+            },
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-zus",
+                  "path": "/tmp/chaosengine-pod-cpu-hog-zus.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\nkind: ChaosEngine\nmetadata:\n  namespace: \"{{workflow.parameters.adminModeNamespace}}\"\n  generateName: pod-cpu-hog-zus\n  labels:\n    workflow_run_id: \"{{workflow.uid}}\"\nspec:\n  engineState: active\n  appinfo:\n    appns: litmus\n    applabel: app=litmus-test\n    appkind: deployment\n  chaosServiceAccount: litmus-admin\n  experiments:\n    - name: pod-cpu-hog\n      spec:\n        components:\n          env:\n            - name: TOTAL_CHAOS_DURATION\n              value: \"3600\"\n            - name: CPU_CORES\n              value: \"1\"\n            - name: PODS_AFFECTED_PERC\n              value: busybox-deployment-6cd5ff56bd-2nrm2\n            - name: CONTAINER_RUNTIME\n              value: containerd\n            - name: SOCKET_PATH\n              value: /run/containerd/containerd.sock\n        probe: []\n"
+                  }
+                }
+              ]
+            },
+            "metadata": {
+              "labels": {
+                "weight": "10"
+              }
+            },
+            "name": "pod-cpu-hog-zus",
+            "outputs": {}
           }
-        }
+        ]
+      },
+      "status": {
+        "artifactRepositoryRef": {
+          "artifactRepository": {},
+          "default": true
+        },
+        "conditions": [
+          {
+            "status": "False",
+            "type": "PodRunning"
+          },
+          {
+            "status": "True",
+            "type": "Completed"
+          }
+        ],
+        "finishedAt": "2023-06-01T11:39:28Z",
+        "nodes": {
+          "blueszzhang-1685619444": {
+            "children": [
+              "blueszzhang-1685619444-1113045989"
+            ],
+            "displayName": "blueszzhang-1685619444",
+            "finishedAt": "2023-06-01T11:39:28Z",
+            "id": "blueszzhang-1685619444",
+            "name": "blueszzhang-1685619444",
+            "outboundNodes": [
+              "blueszzhang-1685619444-3990562094"
+            ],
+            "phase": "Succeeded",
+            "progress": "2/2",
+            "resourcesDuration": {
+              "cpu": 182,
+              "memory": 182
+            },
+            "startedAt": "2023-06-01T11:37:33Z",
+            "templateName": "custom-chaos",
+            "templateScope": "local/blueszzhang-1685619444",
+            "type": "Steps"
+          },
+          "blueszzhang-1685619444-1113045989": {
+            "boundaryID": "blueszzhang-1685619444",
+            "children": [
+              "blueszzhang-1685619444-3276357680"
+            ],
+            "displayName": "[0]",
+            "finishedAt": "2023-06-01T11:38:16Z",
+            "id": "blueszzhang-1685619444-1113045989",
+            "name": "blueszzhang-1685619444[0]",
+            "phase": "Succeeded",
+            "progress": "2/2",
+            "resourcesDuration": {
+              "cpu": 182,
+              "memory": 182
+            },
+            "startedAt": "2023-06-01T11:37:33Z",
+            "templateScope": "local/blueszzhang-1685619444",
+            "type": "StepGroup"
+          },
+          "blueszzhang-1685619444-3276357680": {
+            "boundaryID": "blueszzhang-1685619444",
+            "children": [
+              "blueszzhang-1685619444-4267385456"
+            ],
+            "displayName": "install-chaos-experiments",
+            "finishedAt": "2023-06-01T11:38:06Z",
+            "hostNodeName": "172.16.20.13",
+            "id": "blueszzhang-1685619444-3276357680",
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-zus",
+                  "path": "/tmp/pod-cpu-hog-zus.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\ndescription:\n  message: |\n    Injects cpu consumption on pods belonging to an app deployment\nkind: ChaosExperiment\nmetadata:\n  name: pod-cpu-hog\n  labels:\n    name: pod-cpu-hog\n    app.kubernetes.io/part-of: litmus\n    app.kubernetes.io/component: chaosexperiment\n    app.kubernetes.io/version: latest\nspec:\n  definition:\n    scope: Namespaced\n    permissions:\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods\n        verbs:\n          - create\n          - delete\n          - get\n          - list\n          - patch\n          - update\n          - deletecollection\n      - apiGroups:\n          - \"\"\n        resources:\n          - events\n        verbs:\n          - create\n          - get\n          - list\n          - patch\n          - update\n      - apiGroups:\n          - \"\"\n        resources:\n          - configmaps\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/log\n        verbs:\n          - get\n          - list\n          - watch\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/exec\n        verbs:\n          - get\n          - list\n          - create\n      - apiGroups:\n          - apps\n        resources:\n          - deployments\n          - statefulsets\n          - replicasets\n          - daemonsets\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - apps.openshift.io\n        resources:\n          - deploymentconfigs\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - \"\"\n        resources:\n          - replicationcontrollers\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - argoproj.io\n        resources:\n          - rollouts\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - batch\n        resources:\n          - jobs\n        verbs:\n          - create\n          - list\n          - get\n          - delete\n          - deletecollection\n      - apiGroups:\n          - litmuschaos.io\n        resources:\n          - chaosengines\n          - chaosexperiments\n          - chaosresults\n        verbs:\n          - create\n          - list\n          - get\n          - patch\n          - update\n          - delete\n    image: litmuschaos/go-runner:latest\n    imagePullPolicy: Always\n    args:\n      - -c\n      - ./experiments -name pod-cpu-hog\n    command:\n      - /bin/bash\n    env:\n      - name: TOTAL_CHAOS_DURATION\n        value: \"60\"\n      - name: CPU_CORES\n        value: \"1\"\n      - name: CPU_LOAD\n        value: \"100\"\n      - name: PODS_AFFECTED_PERC\n        value: \"\"\n      - name: RAMP_TIME\n        value: \"\"\n      - name: LIB_IMAGE\n        value: litmuschaos/go-runner:latest\n      - name: STRESS_IMAGE\n        value: alexeiled/stress-ng:latest-ubuntu\n      - name: CONTAINER_RUNTIME\n        value: containerd\n      - name: SOCKET_PATH\n        value: /run/containerd/containerd.sock\n      - name: TARGET_PODS\n        value: \"\"\n      - name: NODE_LABEL\n        value: \"\"\n      - name: SEQUENCE\n        value: parallel\n    labels:\n      name: pod-cpu-hog\n      app.kubernetes.io/part-of: litmus\n      app.kubernetes.io/component: experiment-job\n      app.kubernetes.io/runtime-api-usage: \"true\"\n      app.kubernetes.io/version: latest\n"
+                  }
+                }
+              ]
+            },
+            "name": "blueszzhang-1685619444[0].install-chaos-experiments",
+            "outputs": {
+              "exitCode": "0"
+            },
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 61,
+              "memory": 61
+            },
+            "startedAt": "2023-06-01T11:37:33Z",
+            "templateName": "install-chaos-experiments",
+            "templateScope": "local/blueszzhang-1685619444",
+            "type": "Pod"
+          },
+          "blueszzhang-1685619444-3990562094": {
+            "boundaryID": "blueszzhang-1685619444",
+            "displayName": "pod-cpu-hog-zus",
+            "finishedAt": "2023-06-01T11:39:18Z",
+            "hostNodeName": "172.16.20.13",
+            "id": "blueszzhang-1685619444-3990562094",
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-zus",
+                  "path": "/tmp/chaosengine-pod-cpu-hog-zus.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\nkind: ChaosEngine\nmetadata:\n  namespace: \"litmus\"\n  generateName: pod-cpu-hog-zus\n  labels:\n    workflow_run_id: \"f3425a09-3896-42e4-81b9-a2f197c85979\"\nspec:\n  engineState: active\n  appinfo:\n    appns: litmus\n    applabel: app=litmus-test\n    appkind: deployment\n  chaosServiceAccount: litmus-admin\n  experiments:\n    - name: pod-cpu-hog\n      spec:\n        components:\n          env:\n            - name: TOTAL_CHAOS_DURATION\n              value: \"3600\"\n            - name: CPU_CORES\n              value: \"1\"\n            - name: PODS_AFFECTED_PERC\n              value: busybox-deployment-6cd5ff56bd-2nrm2\n            - name: CONTAINER_RUNTIME\n              value: containerd\n            - name: SOCKET_PATH\n              value: /run/containerd/containerd.sock\n        probe: []\n"
+                  }
+                }
+              ]
+            },
+            "name": "blueszzhang-1685619444[1].pod-cpu-hog-zus",
+            "outputs": {
+              "exitCode": "0"
+            },
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 121,
+              "memory": 121
+            },
+            "startedAt": "2023-06-01T11:38:16Z",
+            "templateName": "pod-cpu-hog-zus",
+            "templateScope": "local/blueszzhang-1685619444",
+            "type": "Pod"
+          },
+          "blueszzhang-1685619444-4267385456": {
+            "boundaryID": "blueszzhang-1685619444",
+            "children": [
+              "blueszzhang-1685619444-3990562094"
+            ],
+            "displayName": "[1]",
+            "finishedAt": "2023-06-01T11:39:28Z",
+            "id": "blueszzhang-1685619444-4267385456",
+            "name": "blueszzhang-1685619444[1]",
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 121,
+              "memory": 121
+            },
+            "startedAt": "2023-06-01T11:38:16Z",
+            "templateScope": "local/blueszzhang-1685619444",
+            "type": "StepGroup"
+          }
+        },
+        "phase": "Succeeded",
+        "progress": "2/2",
+        "resourcesDuration": {
+          "cpu": 182,
+          "memory": 182
+        },
+        "startedAt": "2023-06-01T11:37:33Z"
       }
-    ],
-    "hostIP": "172.16.20.13",
-    "phase": "Running",
-    "podIP": "192.168.0.173",
-    "podIPs": [
-      {
-        "ip": "192.168.0.173"
+    },
+    {
+      "apiVersion": "argoproj.io/v1alpha1",
+      "kind": "Workflow",
+      "metadata": {
+        "annotations": {
+          "workflows.argoproj.io/pod-name-format": "v1"
+        },
+        "creationTimestamp": "2023-06-01T11:48:04Z",
+        "generation": 6,
+        "labels": {
+          "cluster_id": "8dbb4e7c-bdea-4b63-85fd-898aebc8344b",
+          "executed_by": "YWRtaW4",
+          "subject": "custom_litmus",
+          "workflow_id": "4d51abcf-b26d-4539-9c7a-883ea303f1cb",
+          "workflows.argoproj.io/completed": "true",
+          "workflows.argoproj.io/controller-instanceid": "8dbb4e7c-bdea-4b63-85fd-898aebc8344b",
+          "workflows.argoproj.io/phase": "Succeeded"
+        },
+        "name": "custom-1685620076",
+        "namespace": "litmus",
+        "resourceVersion": "3448791134",
+        "uid": "d4243638-c341-414c-af0f-866e2b985ead"
+      },
+      "spec": {
+        "arguments": {
+          "parameters": [
+            {
+              "name": "adminModeNamespace",
+              "value": "litmus"
+            }
+          ]
+        },
+        "entrypoint": "custom-chaos",
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 1000
+        },
+        "serviceAccountName": "argo-chaos",
+        "templates": [
+          {
+            "inputs": {},
+            "metadata": {},
+            "name": "custom-chaos",
+            "outputs": {},
+            "steps": [
+              [
+                {
+                  "arguments": {},
+                  "name": "install-chaos-experiments",
+                  "template": "install-chaos-experiments"
+                }
+              ],
+              [
+                {
+                  "arguments": {},
+                  "name": "pod-cpu-hog-zb5",
+                  "template": "pod-cpu-hog-zb5"
+                }
+              ]
+            ]
+          },
+          {
+            "container": {
+              "args": [
+                "kubectl apply -f /tmp/pod-cpu-hog-zb5.yaml -n {{workflow.parameters.adminModeNamespace}} \u0026\u0026  sleep 30"
+              ],
+              "command": [
+                "sh",
+                "-c"
+              ],
+              "image": "litmuschaos/k8s:2.14.0",
+              "name": "",
+              "resources": {}
+            },
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-zb5",
+                  "path": "/tmp/pod-cpu-hog-zb5.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\ndescription:\n  message: |\n    Injects cpu consumption on pods belonging to an app deployment\nkind: ChaosExperiment\nmetadata:\n  name: pod-cpu-hog\n  labels:\n    name: pod-cpu-hog\n    app.kubernetes.io/part-of: litmus\n    app.kubernetes.io/component: chaosexperiment\n    app.kubernetes.io/version: latest\nspec:\n  definition:\n    scope: Namespaced\n    permissions:\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods\n        verbs:\n          - create\n          - delete\n          - get\n          - list\n          - patch\n          - update\n          - deletecollection\n      - apiGroups:\n          - \"\"\n        resources:\n          - events\n        verbs:\n          - create\n          - get\n          - list\n          - patch\n          - update\n      - apiGroups:\n          - \"\"\n        resources:\n          - configmaps\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/log\n        verbs:\n          - get\n          - list\n          - watch\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/exec\n        verbs:\n          - get\n          - list\n          - create\n      - apiGroups:\n          - apps\n        resources:\n          - deployments\n          - statefulsets\n          - replicasets\n          - daemonsets\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - apps.openshift.io\n        resources:\n          - deploymentconfigs\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - \"\"\n        resources:\n          - replicationcontrollers\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - argoproj.io\n        resources:\n          - rollouts\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - batch\n        resources:\n          - jobs\n        verbs:\n          - create\n          - list\n          - get\n          - delete\n          - deletecollection\n      - apiGroups:\n          - litmuschaos.io\n        resources:\n          - chaosengines\n          - chaosexperiments\n          - chaosresults\n        verbs:\n          - create\n          - list\n          - get\n          - patch\n          - update\n          - delete\n    image: litmuschaos/go-runner:latest\n    imagePullPolicy: Always\n    args:\n      - -c\n      - ./experiments -name pod-cpu-hog\n    command:\n      - /bin/bash\n    env:\n      - name: TOTAL_CHAOS_DURATION\n        value: \"60\"\n      - name: CPU_CORES\n        value: \"1\"\n      - name: CPU_LOAD\n        value: \"100\"\n      - name: PODS_AFFECTED_PERC\n        value: \"\"\n      - name: RAMP_TIME\n        value: \"\"\n      - name: LIB_IMAGE\n        value: litmuschaos/go-runner:latest\n      - name: STRESS_IMAGE\n        value: alexeiled/stress-ng:latest-ubuntu\n      - name: CONTAINER_RUNTIME\n        value: containerd\n      - name: SOCKET_PATH\n        value: /run/containerd/containerd.sock\n      - name: TARGET_PODS\n        value: \"\"\n      - name: NODE_LABEL\n        value: \"\"\n      - name: SEQUENCE\n        value: parallel\n    labels:\n      name: pod-cpu-hog\n      app.kubernetes.io/part-of: litmus\n      app.kubernetes.io/component: experiment-job\n      app.kubernetes.io/runtime-api-usage: \"true\"\n      app.kubernetes.io/version: latest\n"
+                  }
+                }
+              ]
+            },
+            "metadata": {},
+            "name": "install-chaos-experiments",
+            "outputs": {}
+          },
+          {
+            "container": {
+              "args": [
+                "-file=/tmp/chaosengine-pod-cpu-hog-zb5.yaml",
+                "-saveName=/tmp/engine-name"
+              ],
+              "image": "litmuschaos/litmus-checker:2.14.0",
+              "name": "",
+              "resources": {}
+            },
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-zb5",
+                  "path": "/tmp/chaosengine-pod-cpu-hog-zb5.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\nkind: ChaosEngine\nmetadata:\n  namespace: \"{{workflow.parameters.adminModeNamespace}}\"\n  generateName: pod-cpu-hog-zb5\n  labels:\n    workflow_run_id: \"{{workflow.uid}}\"\nspec:\n  engineState: active\n  appinfo:\n    appns: litmus\n    applabel: app=litmus-test\n    appkind: deployment\n  chaosServiceAccount: litmus-admin\n  experiments:\n    - name: pod-cpu-hog\n      spec:\n        components:\n          env:\n            - name: TOTAL_CHAOS_DURATION\n              value: \"3600\"\n            - name: CPU_CORES\n              value: \"1\"\n            - name: PODS_AFFECTED_PERC\n              value: \"100\"\n            - name: CONTAINER_RUNTIME\n              value: containerd\n            - name: SOCKET_PATH\n              value: /run/containerd/containerd.sock\n            - name: TARGET_PODS\n              value: busybox-deployment-6cd5ff56bd-2nrm2\n        probe: []\n"
+                  }
+                }
+              ]
+            },
+            "metadata": {
+              "labels": {
+                "weight": "10"
+              }
+            },
+            "name": "pod-cpu-hog-zb5",
+            "outputs": {}
+          }
+        ]
+      },
+      "status": {
+        "artifactRepositoryRef": {
+          "artifactRepository": {},
+          "default": true
+        },
+        "conditions": [
+          {
+            "status": "False",
+            "type": "PodRunning"
+          },
+          {
+            "status": "True",
+            "type": "Completed"
+          }
+        ],
+        "finishedAt": "2023-06-01T12:49:59Z",
+        "nodes": {
+          "custom-1685620076": {
+            "children": [
+              "custom-1685620076-3177427002"
+            ],
+            "displayName": "custom-1685620076",
+            "finishedAt": "2023-06-01T12:49:59Z",
+            "id": "custom-1685620076",
+            "name": "custom-1685620076",
+            "outboundNodes": [
+              "custom-1685620076-2730417432"
+            ],
+            "phase": "Succeeded",
+            "progress": "2/2",
+            "resourcesDuration": {
+              "cpu": 7385,
+              "memory": 7385
+            },
+            "startedAt": "2023-06-01T11:48:04Z",
+            "templateName": "custom-chaos",
+            "templateScope": "local/custom-1685620076",
+            "type": "Steps"
+          },
+          "custom-1685620076-135658183": {
+            "boundaryID": "custom-1685620076",
+            "children": [
+              "custom-1685620076-4183937047"
+            ],
+            "displayName": "install-chaos-experiments",
+            "finishedAt": "2023-06-01T11:48:36Z",
+            "hostNodeName": "172.16.20.13",
+            "id": "custom-1685620076-135658183",
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-zb5",
+                  "path": "/tmp/pod-cpu-hog-zb5.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\ndescription:\n  message: |\n    Injects cpu consumption on pods belonging to an app deployment\nkind: ChaosExperiment\nmetadata:\n  name: pod-cpu-hog\n  labels:\n    name: pod-cpu-hog\n    app.kubernetes.io/part-of: litmus\n    app.kubernetes.io/component: chaosexperiment\n    app.kubernetes.io/version: latest\nspec:\n  definition:\n    scope: Namespaced\n    permissions:\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods\n        verbs:\n          - create\n          - delete\n          - get\n          - list\n          - patch\n          - update\n          - deletecollection\n      - apiGroups:\n          - \"\"\n        resources:\n          - events\n        verbs:\n          - create\n          - get\n          - list\n          - patch\n          - update\n      - apiGroups:\n          - \"\"\n        resources:\n          - configmaps\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/log\n        verbs:\n          - get\n          - list\n          - watch\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/exec\n        verbs:\n          - get\n          - list\n          - create\n      - apiGroups:\n          - apps\n        resources:\n          - deployments\n          - statefulsets\n          - replicasets\n          - daemonsets\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - apps.openshift.io\n        resources:\n          - deploymentconfigs\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - \"\"\n        resources:\n          - replicationcontrollers\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - argoproj.io\n        resources:\n          - rollouts\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - batch\n        resources:\n          - jobs\n        verbs:\n          - create\n          - list\n          - get\n          - delete\n          - deletecollection\n      - apiGroups:\n          - litmuschaos.io\n        resources:\n          - chaosengines\n          - chaosexperiments\n          - chaosresults\n        verbs:\n          - create\n          - list\n          - get\n          - patch\n          - update\n          - delete\n    image: litmuschaos/go-runner:latest\n    imagePullPolicy: Always\n    args:\n      - -c\n      - ./experiments -name pod-cpu-hog\n    command:\n      - /bin/bash\n    env:\n      - name: TOTAL_CHAOS_DURATION\n        value: \"60\"\n      - name: CPU_CORES\n        value: \"1\"\n      - name: CPU_LOAD\n        value: \"100\"\n      - name: PODS_AFFECTED_PERC\n        value: \"\"\n      - name: RAMP_TIME\n        value: \"\"\n      - name: LIB_IMAGE\n        value: litmuschaos/go-runner:latest\n      - name: STRESS_IMAGE\n        value: alexeiled/stress-ng:latest-ubuntu\n      - name: CONTAINER_RUNTIME\n        value: containerd\n      - name: SOCKET_PATH\n        value: /run/containerd/containerd.sock\n      - name: TARGET_PODS\n        value: \"\"\n      - name: NODE_LABEL\n        value: \"\"\n      - name: SEQUENCE\n        value: parallel\n    labels:\n      name: pod-cpu-hog\n      app.kubernetes.io/part-of: litmus\n      app.kubernetes.io/component: experiment-job\n      app.kubernetes.io/runtime-api-usage: \"true\"\n      app.kubernetes.io/version: latest\n"
+                  }
+                }
+              ]
+            },
+            "name": "custom-1685620076[0].install-chaos-experiments",
+            "outputs": {
+              "exitCode": "0"
+            },
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 61,
+              "memory": 61
+            },
+            "startedAt": "2023-06-01T11:48:04Z",
+            "templateName": "install-chaos-experiments",
+            "templateScope": "local/custom-1685620076",
+            "type": "Pod"
+          },
+          "custom-1685620076-2730417432": {
+            "boundaryID": "custom-1685620076",
+            "displayName": "pod-cpu-hog-zb5",
+            "finishedAt": "2023-06-01T12:49:49Z",
+            "hostNodeName": "172.16.20.13",
+            "id": "custom-1685620076-2730417432",
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-zb5",
+                  "path": "/tmp/chaosengine-pod-cpu-hog-zb5.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\nkind: ChaosEngine\nmetadata:\n  namespace: \"litmus\"\n  generateName: pod-cpu-hog-zb5\n  labels:\n    workflow_run_id: \"d4243638-c341-414c-af0f-866e2b985ead\"\nspec:\n  engineState: active\n  appinfo:\n    appns: litmus\n    applabel: app=litmus-test\n    appkind: deployment\n  chaosServiceAccount: litmus-admin\n  experiments:\n    - name: pod-cpu-hog\n      spec:\n        components:\n          env:\n            - name: TOTAL_CHAOS_DURATION\n              value: \"3600\"\n            - name: CPU_CORES\n              value: \"1\"\n            - name: PODS_AFFECTED_PERC\n              value: \"100\"\n            - name: CONTAINER_RUNTIME\n              value: containerd\n            - name: SOCKET_PATH\n              value: /run/containerd/containerd.sock\n            - name: TARGET_PODS\n              value: busybox-deployment-6cd5ff56bd-2nrm2\n        probe: []\n"
+                  }
+                }
+              ]
+            },
+            "name": "custom-1685620076[1].pod-cpu-hog-zb5",
+            "outputs": {
+              "exitCode": "0"
+            },
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 7324,
+              "memory": 7324
+            },
+            "startedAt": "2023-06-01T11:48:46Z",
+            "templateName": "pod-cpu-hog-zb5",
+            "templateScope": "local/custom-1685620076",
+            "type": "Pod"
+          },
+          "custom-1685620076-3177427002": {
+            "boundaryID": "custom-1685620076",
+            "children": [
+              "custom-1685620076-135658183"
+            ],
+            "displayName": "[0]",
+            "finishedAt": "2023-06-01T11:48:46Z",
+            "id": "custom-1685620076-3177427002",
+            "name": "custom-1685620076[0]",
+            "phase": "Succeeded",
+            "progress": "2/2",
+            "resourcesDuration": {
+              "cpu": 7385,
+              "memory": 7385
+            },
+            "startedAt": "2023-06-01T11:48:04Z",
+            "templateScope": "local/custom-1685620076",
+            "type": "StepGroup"
+          },
+          "custom-1685620076-4183937047": {
+            "boundaryID": "custom-1685620076",
+            "children": [
+              "custom-1685620076-2730417432"
+            ],
+            "displayName": "[1]",
+            "finishedAt": "2023-06-01T12:49:59Z",
+            "id": "custom-1685620076-4183937047",
+            "name": "custom-1685620076[1]",
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 7324,
+              "memory": 7324
+            },
+            "startedAt": "2023-06-01T11:48:46Z",
+            "templateScope": "local/custom-1685620076",
+            "type": "StepGroup"
+          }
+        },
+        "phase": "Succeeded",
+        "progress": "2/2",
+        "resourcesDuration": {
+          "cpu": 7385,
+          "memory": 7385
+        },
+        "startedAt": "2023-06-01T11:48:04Z"
       }
-    ],
-    "qosClass": "BestEffort",
-    "startTime": "2023-06-01T11:48:54Z"
+    },
+    {
+      "apiVersion": "argoproj.io/v1alpha1",
+      "kind": "Workflow",
+      "metadata": {
+        "annotations": {
+          "workflows.argoproj.io/pod-name-format": "v1"
+        },
+        "creationTimestamp": "2023-06-01T11:27:38Z",
+        "generation": 6,
+        "labels": {
+          "cluster_id": "8dbb4e7c-bdea-4b63-85fd-898aebc8344b",
+          "executed_by": "YWRtaW4",
+          "subject": "litmus-test_litmus",
+          "workflow_id": "513c66cd-083f-45a1-ba00-2b356be5dfba",
+          "workflows.argoproj.io/completed": "true",
+          "workflows.argoproj.io/controller-instanceid": "8dbb4e7c-bdea-4b63-85fd-898aebc8344b",
+          "workflows.argoproj.io/phase": "Succeeded"
+        },
+        "name": "litmus-test-1685618849",
+        "namespace": "litmus",
+        "resourceVersion": "3446542131",
+        "uid": "c4c3ec12-1a81-48c1-9a02-0afad7de4eef"
+      },
+      "spec": {
+        "arguments": {
+          "parameters": [
+            {
+              "name": "adminModeNamespace",
+              "value": "litmus"
+            }
+          ]
+        },
+        "entrypoint": "custom-chaos",
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 1000
+        },
+        "serviceAccountName": "argo-chaos",
+        "templates": [
+          {
+            "inputs": {},
+            "metadata": {},
+            "name": "custom-chaos",
+            "outputs": {},
+            "steps": [
+              [
+                {
+                  "arguments": {},
+                  "name": "install-chaos-experiments",
+                  "template": "install-chaos-experiments"
+                }
+              ],
+              [
+                {
+                  "arguments": {},
+                  "name": "pod-cpu-hog-5bs",
+                  "template": "pod-cpu-hog-5bs"
+                }
+              ]
+            ]
+          },
+          {
+            "container": {
+              "args": [
+                "kubectl apply -f /tmp/pod-cpu-hog-5bs.yaml -n {{workflow.parameters.adminModeNamespace}} \u0026\u0026  sleep 30"
+              ],
+              "command": [
+                "sh",
+                "-c"
+              ],
+              "image": "litmuschaos/k8s:2.14.0",
+              "name": "",
+              "resources": {}
+            },
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-5bs",
+                  "path": "/tmp/pod-cpu-hog-5bs.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\ndescription:\n  message: |\n    Injects cpu consumption on pods belonging to an app deployment\nkind: ChaosExperiment\nmetadata:\n  name: pod-cpu-hog\n  labels:\n    name: pod-cpu-hog\n    app.kubernetes.io/part-of: litmus\n    app.kubernetes.io/component: chaosexperiment\n    app.kubernetes.io/version: latest\nspec:\n  definition:\n    scope: Namespaced\n    permissions:\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods\n        verbs:\n          - create\n          - delete\n          - get\n          - list\n          - patch\n          - update\n          - deletecollection\n      - apiGroups:\n          - \"\"\n        resources:\n          - events\n        verbs:\n          - create\n          - get\n          - list\n          - patch\n          - update\n      - apiGroups:\n          - \"\"\n        resources:\n          - configmaps\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/log\n        verbs:\n          - get\n          - list\n          - watch\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/exec\n        verbs:\n          - get\n          - list\n          - create\n      - apiGroups:\n          - apps\n        resources:\n          - deployments\n          - statefulsets\n          - replicasets\n          - daemonsets\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - apps.openshift.io\n        resources:\n          - deploymentconfigs\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - \"\"\n        resources:\n          - replicationcontrollers\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - argoproj.io\n        resources:\n          - rollouts\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - batch\n        resources:\n          - jobs\n        verbs:\n          - create\n          - list\n          - get\n          - delete\n          - deletecollection\n      - apiGroups:\n          - litmuschaos.io\n        resources:\n          - chaosengines\n          - chaosexperiments\n          - chaosresults\n        verbs:\n          - create\n          - list\n          - get\n          - patch\n          - update\n          - delete\n    image: litmuschaos/go-runner:latest\n    imagePullPolicy: Always\n    args:\n      - -c\n      - ./experiments -name pod-cpu-hog\n    command:\n      - /bin/bash\n    env:\n      - name: TOTAL_CHAOS_DURATION\n        value: \"60\"\n      - name: CPU_CORES\n        value: \"1\"\n      - name: CPU_LOAD\n        value: \"100\"\n      - name: PODS_AFFECTED_PERC\n        value: \"\"\n      - name: RAMP_TIME\n        value: \"\"\n      - name: LIB_IMAGE\n        value: litmuschaos/go-runner:latest\n      - name: STRESS_IMAGE\n        value: alexeiled/stress-ng:latest-ubuntu\n      - name: CONTAINER_RUNTIME\n        value: containerd\n      - name: SOCKET_PATH\n        value: /run/containerd/containerd.sock\n      - name: TARGET_PODS\n        value: \"\"\n      - name: NODE_LABEL\n        value: \"\"\n      - name: SEQUENCE\n        value: parallel\n    labels:\n      name: pod-cpu-hog\n      app.kubernetes.io/part-of: litmus\n      app.kubernetes.io/component: experiment-job\n      app.kubernetes.io/runtime-api-usage: \"true\"\n      app.kubernetes.io/version: latest\n"
+                  }
+                }
+              ]
+            },
+            "metadata": {},
+            "name": "install-chaos-experiments",
+            "outputs": {}
+          },
+          {
+            "container": {
+              "args": [
+                "-file=/tmp/chaosengine-pod-cpu-hog-5bs.yaml",
+                "-saveName=/tmp/engine-name"
+              ],
+              "image": "litmuschaos/litmus-checker:2.14.0",
+              "name": "",
+              "resources": {}
+            },
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-5bs",
+                  "path": "/tmp/chaosengine-pod-cpu-hog-5bs.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\nkind: ChaosEngine\nmetadata:\n  namespace: \"{{workflow.parameters.adminModeNamespace}}\"\n  generateName: pod-cpu-hog-5bs\n  labels:\n    workflow_run_id: \"{{workflow.uid}}\"\nspec:\n  engineState: active\n  appinfo:\n    appns: litmus\n    applabel: app=litmus-test\n    appkind: deployment\n  chaosServiceAccount: litmus-admin\n  experiments:\n    - name: pod-cpu-hog\n      spec:\n        components:\n          env:\n            - name: TOTAL_CHAOS_DURATION\n              value: \"3600\"\n            - name: CPU_CORES\n              value: \"1\"\n            - name: PODS_AFFECTED_PERC\n              value: \"\"\n            - name: CONTAINER_RUNTIME\n              value: containerd\n            - name: SOCKET_PATH\n              value: /run/containerd/containerd.sock\n        probe: []\n"
+                  }
+                }
+              ]
+            },
+            "metadata": {
+              "labels": {
+                "weight": "10"
+              }
+            },
+            "name": "pod-cpu-hog-5bs",
+            "outputs": {}
+          }
+        ]
+      },
+      "status": {
+        "artifactRepositoryRef": {
+          "artifactRepository": {},
+          "default": true
+        },
+        "conditions": [
+          {
+            "status": "False",
+            "type": "PodRunning"
+          },
+          {
+            "status": "True",
+            "type": "Completed"
+          }
+        ],
+        "finishedAt": "2023-06-01T11:29:32Z",
+        "nodes": {
+          "litmus-test-1685618849": {
+            "children": [
+              "litmus-test-1685618849-1277084569"
+            ],
+            "displayName": "litmus-test-1685618849",
+            "finishedAt": "2023-06-01T11:29:32Z",
+            "id": "litmus-test-1685618849",
+            "name": "litmus-test-1685618849",
+            "outboundNodes": [
+              "litmus-test-1685618849-2669039048"
+            ],
+            "phase": "Succeeded",
+            "progress": "2/2",
+            "resourcesDuration": {
+              "cpu": 183,
+              "memory": 183
+            },
+            "startedAt": "2023-06-01T11:27:38Z",
+            "templateName": "custom-chaos",
+            "templateScope": "local/litmus-test-1685618849",
+            "type": "Steps"
+          },
+          "litmus-test-1685618849-1277084569": {
+            "boundaryID": "litmus-test-1685618849",
+            "children": [
+              "litmus-test-1685618849-704884196"
+            ],
+            "displayName": "[0]",
+            "finishedAt": "2023-06-01T11:28:19Z",
+            "id": "litmus-test-1685618849-1277084569",
+            "name": "litmus-test-1685618849[0]",
+            "phase": "Succeeded",
+            "progress": "2/2",
+            "resourcesDuration": {
+              "cpu": 183,
+              "memory": 183
+            },
+            "startedAt": "2023-06-01T11:27:38Z",
+            "templateScope": "local/litmus-test-1685618849",
+            "type": "StepGroup"
+          },
+          "litmus-test-1685618849-136456740": {
+            "boundaryID": "litmus-test-1685618849",
+            "children": [
+              "litmus-test-1685618849-2669039048"
+            ],
+            "displayName": "[1]",
+            "finishedAt": "2023-06-01T11:29:32Z",
+            "id": "litmus-test-1685618849-136456740",
+            "name": "litmus-test-1685618849[1]",
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 121,
+              "memory": 121
+            },
+            "startedAt": "2023-06-01T11:28:19Z",
+            "templateScope": "local/litmus-test-1685618849",
+            "type": "StepGroup"
+          },
+          "litmus-test-1685618849-2669039048": {
+            "boundaryID": "litmus-test-1685618849",
+            "displayName": "pod-cpu-hog-5bs",
+            "finishedAt": "2023-06-01T11:29:22Z",
+            "hostNodeName": "172.16.20.13",
+            "id": "litmus-test-1685618849-2669039048",
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-5bs",
+                  "path": "/tmp/chaosengine-pod-cpu-hog-5bs.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\nkind: ChaosEngine\nmetadata:\n  namespace: \"litmus\"\n  generateName: pod-cpu-hog-5bs\n  labels:\n    workflow_run_id: \"c4c3ec12-1a81-48c1-9a02-0afad7de4eef\"\nspec:\n  engineState: active\n  appinfo:\n    appns: litmus\n    applabel: app=litmus-test\n    appkind: deployment\n  chaosServiceAccount: litmus-admin\n  experiments:\n    - name: pod-cpu-hog\n      spec:\n        components:\n          env:\n            - name: TOTAL_CHAOS_DURATION\n              value: \"3600\"\n            - name: CPU_CORES\n              value: \"1\"\n            - name: PODS_AFFECTED_PERC\n              value: \"\"\n            - name: CONTAINER_RUNTIME\n              value: containerd\n            - name: SOCKET_PATH\n              value: /run/containerd/containerd.sock\n        probe: []\n"
+                  }
+                }
+              ]
+            },
+            "name": "litmus-test-1685618849[1].pod-cpu-hog-5bs",
+            "outputs": {
+              "exitCode": "0"
+            },
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 121,
+              "memory": 121
+            },
+            "startedAt": "2023-06-01T11:28:19Z",
+            "templateName": "pod-cpu-hog-5bs",
+            "templateScope": "local/litmus-test-1685618849",
+            "type": "Pod"
+          },
+          "litmus-test-1685618849-704884196": {
+            "boundaryID": "litmus-test-1685618849",
+            "children": [
+              "litmus-test-1685618849-136456740"
+            ],
+            "displayName": "install-chaos-experiments",
+            "finishedAt": "2023-06-01T11:28:09Z",
+            "hostNodeName": "172.16.20.13",
+            "id": "litmus-test-1685618849-704884196",
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-5bs",
+                  "path": "/tmp/pod-cpu-hog-5bs.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\ndescription:\n  message: |\n    Injects cpu consumption on pods belonging to an app deployment\nkind: ChaosExperiment\nmetadata:\n  name: pod-cpu-hog\n  labels:\n    name: pod-cpu-hog\n    app.kubernetes.io/part-of: litmus\n    app.kubernetes.io/component: chaosexperiment\n    app.kubernetes.io/version: latest\nspec:\n  definition:\n    scope: Namespaced\n    permissions:\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods\n        verbs:\n          - create\n          - delete\n          - get\n          - list\n          - patch\n          - update\n          - deletecollection\n      - apiGroups:\n          - \"\"\n        resources:\n          - events\n        verbs:\n          - create\n          - get\n          - list\n          - patch\n          - update\n      - apiGroups:\n          - \"\"\n        resources:\n          - configmaps\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/log\n        verbs:\n          - get\n          - list\n          - watch\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/exec\n        verbs:\n          - get\n          - list\n          - create\n      - apiGroups:\n          - apps\n        resources:\n          - deployments\n          - statefulsets\n          - replicasets\n          - daemonsets\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - apps.openshift.io\n        resources:\n          - deploymentconfigs\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - \"\"\n        resources:\n          - replicationcontrollers\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - argoproj.io\n        resources:\n          - rollouts\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - batch\n        resources:\n          - jobs\n        verbs:\n          - create\n          - list\n          - get\n          - delete\n          - deletecollection\n      - apiGroups:\n          - litmuschaos.io\n        resources:\n          - chaosengines\n          - chaosexperiments\n          - chaosresults\n        verbs:\n          - create\n          - list\n          - get\n          - patch\n          - update\n          - delete\n    image: litmuschaos/go-runner:latest\n    imagePullPolicy: Always\n    args:\n      - -c\n      - ./experiments -name pod-cpu-hog\n    command:\n      - /bin/bash\n    env:\n      - name: TOTAL_CHAOS_DURATION\n        value: \"60\"\n      - name: CPU_CORES\n        value: \"1\"\n      - name: CPU_LOAD\n        value: \"100\"\n      - name: PODS_AFFECTED_PERC\n        value: \"\"\n      - name: RAMP_TIME\n        value: \"\"\n      - name: LIB_IMAGE\n        value: litmuschaos/go-runner:latest\n      - name: STRESS_IMAGE\n        value: alexeiled/stress-ng:latest-ubuntu\n      - name: CONTAINER_RUNTIME\n        value: containerd\n      - name: SOCKET_PATH\n        value: /run/containerd/containerd.sock\n      - name: TARGET_PODS\n        value: \"\"\n      - name: NODE_LABEL\n        value: \"\"\n      - name: SEQUENCE\n        value: parallel\n    labels:\n      name: pod-cpu-hog\n      app.kubernetes.io/part-of: litmus\n      app.kubernetes.io/component: experiment-job\n      app.kubernetes.io/runtime-api-usage: \"true\"\n      app.kubernetes.io/version: latest\n"
+                  }
+                }
+              ]
+            },
+            "name": "litmus-test-1685618849[0].install-chaos-experiments",
+            "outputs": {
+              "exitCode": "0"
+            },
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 62,
+              "memory": 62
+            },
+            "startedAt": "2023-06-01T11:27:38Z",
+            "templateName": "install-chaos-experiments",
+            "templateScope": "local/litmus-test-1685618849",
+            "type": "Pod"
+          }
+        },
+        "phase": "Succeeded",
+        "progress": "2/2",
+        "resourcesDuration": {
+          "cpu": 183,
+          "memory": 183
+        },
+        "startedAt": "2023-06-01T11:27:38Z"
+      }
+    },
+    {
+      "apiVersion": "argoproj.io/v1alpha1",
+      "kind": "Workflow",
+      "metadata": {
+        "annotations": {
+          "workflows.argoproj.io/pod-name-format": "v1"
+        },
+        "creationTimestamp": "2023-06-01T10:26:49Z",
+        "generation": 7,
+        "labels": {
+          "cluster_id": "8dbb4e7c-bdea-4b63-85fd-898aebc8344b",
+          "executed_by": "YWRtaW4",
+          "subject": "test11_litmus",
+          "workflow_id": "188b6d19-ec0e-4aa5-81ea-268ef9c9a942",
+          "workflows.argoproj.io/completed": "true",
+          "workflows.argoproj.io/controller-instanceid": "8dbb4e7c-bdea-4b63-85fd-898aebc8344b",
+          "workflows.argoproj.io/phase": "Succeeded"
+        },
+        "name": "test11-1685615183",
+        "namespace": "litmus",
+        "resourceVersion": "3444815518",
+        "uid": "0aae0949-9479-489b-bacb-b0ba2dc308a9"
+      },
+      "spec": {
+        "arguments": {
+          "parameters": [
+            {
+              "name": "adminModeNamespace",
+              "value": "litmus"
+            }
+          ]
+        },
+        "entrypoint": "custom-chaos",
+        "podGC": {
+          "strategy": "OnWorkflowCompletion"
+        },
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 1000
+        },
+        "serviceAccountName": "argo-chaos",
+        "templates": [
+          {
+            "inputs": {},
+            "metadata": {},
+            "name": "custom-chaos",
+            "outputs": {},
+            "steps": [
+              [
+                {
+                  "arguments": {},
+                  "name": "install-chaos-experiments",
+                  "template": "install-chaos-experiments"
+                }
+              ],
+              [
+                {
+                  "arguments": {},
+                  "name": "pod-cpu-hog-0ow",
+                  "template": "pod-cpu-hog-0ow"
+                }
+              ],
+              [
+                {
+                  "arguments": {},
+                  "name": "revert-chaos",
+                  "template": "revert-chaos"
+                }
+              ]
+            ]
+          },
+          {
+            "container": {
+              "args": [
+                "kubectl apply -f /tmp/pod-cpu-hog-0ow.yaml -n {{workflow.parameters.adminModeNamespace}} \u0026\u0026  sleep 30"
+              ],
+              "command": [
+                "sh",
+                "-c"
+              ],
+              "image": "litmuschaos/k8s:2.14.0",
+              "name": "",
+              "resources": {}
+            },
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-0ow",
+                  "path": "/tmp/pod-cpu-hog-0ow.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\ndescription:\n  message: |\n    Injects cpu consumption on pods belonging to an app deployment\nkind: ChaosExperiment\nmetadata:\n  name: pod-cpu-hog\n  labels:\n    name: pod-cpu-hog\n    app.kubernetes.io/part-of: litmus\n    app.kubernetes.io/component: chaosexperiment\n    app.kubernetes.io/version: latest\nspec:\n  definition:\n    scope: Namespaced\n    permissions:\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods\n        verbs:\n          - create\n          - delete\n          - get\n          - list\n          - patch\n          - update\n          - deletecollection\n      - apiGroups:\n          - \"\"\n        resources:\n          - events\n        verbs:\n          - create\n          - get\n          - list\n          - patch\n          - update\n      - apiGroups:\n          - \"\"\n        resources:\n          - configmaps\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/log\n        verbs:\n          - get\n          - list\n          - watch\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/exec\n        verbs:\n          - get\n          - list\n          - create\n      - apiGroups:\n          - apps\n        resources:\n          - deployments\n          - statefulsets\n          - replicasets\n          - daemonsets\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - apps.openshift.io\n        resources:\n          - deploymentconfigs\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - \"\"\n        resources:\n          - replicationcontrollers\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - argoproj.io\n        resources:\n          - rollouts\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - batch\n        resources:\n          - jobs\n        verbs:\n          - create\n          - list\n          - get\n          - delete\n          - deletecollection\n      - apiGroups:\n          - litmuschaos.io\n        resources:\n          - chaosengines\n          - chaosexperiments\n          - chaosresults\n        verbs:\n          - create\n          - list\n          - get\n          - patch\n          - update\n          - delete\n    image: litmuschaos/go-runner:latest\n    imagePullPolicy: Always\n    args:\n      - -c\n      - ./experiments -name pod-cpu-hog\n    command:\n      - /bin/bash\n    env:\n      - name: TOTAL_CHAOS_DURATION\n        value: \"60\"\n      - name: CPU_CORES\n        value: \"1\"\n      - name: CPU_LOAD\n        value: \"100\"\n      - name: PODS_AFFECTED_PERC\n        value: \"\"\n      - name: RAMP_TIME\n        value: \"\"\n      - name: LIB_IMAGE\n        value: litmuschaos/go-runner:latest\n      - name: STRESS_IMAGE\n        value: alexeiled/stress-ng:latest-ubuntu\n      - name: CONTAINER_RUNTIME\n        value: containerd\n      - name: SOCKET_PATH\n        value: /run/containerd/containerd.sock\n      - name: TARGET_PODS\n        value: \"\"\n      - name: NODE_LABEL\n        value: \"\"\n      - name: SEQUENCE\n        value: parallel\n    labels:\n      name: pod-cpu-hog\n      app.kubernetes.io/part-of: litmus\n      app.kubernetes.io/component: experiment-job\n      app.kubernetes.io/runtime-api-usage: \"true\"\n      app.kubernetes.io/version: latest\n"
+                  }
+                }
+              ]
+            },
+            "metadata": {},
+            "name": "install-chaos-experiments",
+            "outputs": {}
+          },
+          {
+            "container": {
+              "args": [
+                "-file=/tmp/chaosengine-pod-cpu-hog-0ow.yaml",
+                "-saveName=/tmp/engine-name"
+              ],
+              "image": "litmuschaos/litmus-checker:2.14.0",
+              "name": "",
+              "resources": {}
+            },
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-0ow",
+                  "path": "/tmp/chaosengine-pod-cpu-hog-0ow.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\nkind: ChaosEngine\nmetadata:\n  namespace: \"{{workflow.parameters.adminModeNamespace}}\"\n  generateName: pod-cpu-hog-0ow\n  labels:\n    workflow_run_id: \"{{workflow.uid}}\"\nspec:\n  engineState: active\n  appinfo:\n    appns: litmus\n    applabel: app=litmus-test\n    appkind: deployment\n  chaosServiceAccount: litmus-admin\n  experiments:\n    - name: pod-cpu-hog\n      spec:\n        components:\n          env:\n            - name: TOTAL_CHAOS_DURATION\n              value: \"3600\"\n            - name: CPU_CORES\n              value: \"1\"\n            - name: PODS_AFFECTED_PERC\n              value: \"\"\n            - name: CONTAINER_RUNTIME\n              value: containerd\n            - name: SOCKET_PATH\n              value: /run/containerd/containerd.sock\n        probe: []\n"
+                  }
+                }
+              ]
+            },
+            "metadata": {
+              "labels": {
+                "weight": "10"
+              }
+            },
+            "name": "pod-cpu-hog-0ow",
+            "outputs": {}
+          },
+          {
+            "container": {
+              "args": [
+                "kubectl delete chaosengine -l workflow_run_id={{workflow.uid}} -n {{workflow.parameters.adminModeNamespace}}"
+              ],
+              "command": [
+                "sh",
+                "-c"
+              ],
+              "image": "litmuschaos/k8s:2.14.0",
+              "name": "",
+              "resources": {}
+            },
+            "inputs": {},
+            "metadata": {},
+            "name": "revert-chaos",
+            "outputs": {}
+          }
+        ]
+      },
+      "status": {
+        "artifactRepositoryRef": {
+          "artifactRepository": {},
+          "default": true
+        },
+        "conditions": [
+          {
+            "status": "False",
+            "type": "PodRunning"
+          },
+          {
+            "status": "True",
+            "type": "Completed"
+          }
+        ],
+        "finishedAt": "2023-06-01T10:28:54Z",
+        "nodes": {
+          "test11-1685615183": {
+            "children": [
+              "test11-1685615183-2377182734"
+            ],
+            "displayName": "test11-1685615183",
+            "finishedAt": "2023-06-01T10:28:54Z",
+            "id": "test11-1685615183",
+            "name": "test11-1685615183",
+            "outboundNodes": [
+              "test11-1685615183-1495513725"
+            ],
+            "phase": "Succeeded",
+            "progress": "3/3",
+            "resourcesDuration": {
+              "cpu": 188,
+              "memory": 188
+            },
+            "startedAt": "2023-06-01T10:26:49Z",
+            "templateName": "custom-chaos",
+            "templateScope": "local/test11-1685615183",
+            "type": "Steps"
+          },
+          "test11-1685615183-1236157547": {
+            "boundaryID": "test11-1685615183",
+            "children": [
+              "test11-1685615183-564913505"
+            ],
+            "displayName": "[1]",
+            "finishedAt": "2023-06-01T10:28:44Z",
+            "id": "test11-1685615183-1236157547",
+            "name": "test11-1685615183[1]",
+            "phase": "Succeeded",
+            "progress": "2/2",
+            "resourcesDuration": {
+              "cpu": 127,
+              "memory": 127
+            },
+            "startedAt": "2023-06-01T10:27:32Z",
+            "templateScope": "local/test11-1685615183",
+            "type": "StepGroup"
+          },
+          "test11-1685615183-1236598832": {
+            "boundaryID": "test11-1685615183",
+            "children": [
+              "test11-1685615183-1495513725"
+            ],
+            "displayName": "[2]",
+            "finishedAt": "2023-06-01T10:28:54Z",
+            "id": "test11-1685615183-1236598832",
+            "name": "test11-1685615183[2]",
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 6,
+              "memory": 6
+            },
+            "startedAt": "2023-06-01T10:28:44Z",
+            "templateScope": "local/test11-1685615183",
+            "type": "StepGroup"
+          },
+          "test11-1685615183-1495513725": {
+            "boundaryID": "test11-1685615183",
+            "displayName": "revert-chaos",
+            "finishedAt": "2023-06-01T10:28:48Z",
+            "hostNodeName": "172.16.20.13",
+            "id": "test11-1685615183-1495513725",
+            "name": "test11-1685615183[2].revert-chaos",
+            "outputs": {
+              "exitCode": "0"
+            },
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 6,
+              "memory": 6
+            },
+            "startedAt": "2023-06-01T10:28:44Z",
+            "templateName": "revert-chaos",
+            "templateScope": "local/test11-1685615183",
+            "type": "Pod"
+          },
+          "test11-1685615183-2377182734": {
+            "boundaryID": "test11-1685615183",
+            "children": [
+              "test11-1685615183-939389659"
+            ],
+            "displayName": "[0]",
+            "finishedAt": "2023-06-01T10:27:32Z",
+            "id": "test11-1685615183-2377182734",
+            "name": "test11-1685615183[0]",
+            "phase": "Succeeded",
+            "progress": "3/3",
+            "resourcesDuration": {
+              "cpu": 188,
+              "memory": 188
+            },
+            "startedAt": "2023-06-01T10:26:49Z",
+            "templateScope": "local/test11-1685615183",
+            "type": "StepGroup"
+          },
+          "test11-1685615183-564913505": {
+            "boundaryID": "test11-1685615183",
+            "children": [
+              "test11-1685615183-1236598832"
+            ],
+            "displayName": "pod-cpu-hog-0ow",
+            "finishedAt": "2023-06-01T10:28:34Z",
+            "hostNodeName": "172.16.20.13",
+            "id": "test11-1685615183-564913505",
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-0ow",
+                  "path": "/tmp/chaosengine-pod-cpu-hog-0ow.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\nkind: ChaosEngine\nmetadata:\n  namespace: \"litmus\"\n  generateName: pod-cpu-hog-0ow\n  labels:\n    workflow_run_id: \"0aae0949-9479-489b-bacb-b0ba2dc308a9\"\nspec:\n  engineState: active\n  appinfo:\n    appns: litmus\n    applabel: app=litmus-test\n    appkind: deployment\n  chaosServiceAccount: litmus-admin\n  experiments:\n    - name: pod-cpu-hog\n      spec:\n        components:\n          env:\n            - name: TOTAL_CHAOS_DURATION\n              value: \"3600\"\n            - name: CPU_CORES\n              value: \"1\"\n            - name: PODS_AFFECTED_PERC\n              value: \"\"\n            - name: CONTAINER_RUNTIME\n              value: containerd\n            - name: SOCKET_PATH\n              value: /run/containerd/containerd.sock\n        probe: []\n"
+                  }
+                }
+              ]
+            },
+            "name": "test11-1685615183[1].pod-cpu-hog-0ow",
+            "outputs": {
+              "exitCode": "0"
+            },
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 121,
+              "memory": 121
+            },
+            "startedAt": "2023-06-01T10:27:32Z",
+            "templateName": "pod-cpu-hog-0ow",
+            "templateScope": "local/test11-1685615183",
+            "type": "Pod"
+          },
+          "test11-1685615183-939389659": {
+            "boundaryID": "test11-1685615183",
+            "children": [
+              "test11-1685615183-1236157547"
+            ],
+            "displayName": "install-chaos-experiments",
+            "finishedAt": "2023-06-01T10:27:22Z",
+            "hostNodeName": "172.16.20.13",
+            "id": "test11-1685615183-939389659",
+            "inputs": {
+              "artifacts": [
+                {
+                  "name": "pod-cpu-hog-0ow",
+                  "path": "/tmp/pod-cpu-hog-0ow.yaml",
+                  "raw": {
+                    "data": "apiVersion: litmuschaos.io/v1alpha1\ndescription:\n  message: |\n    Injects cpu consumption on pods belonging to an app deployment\nkind: ChaosExperiment\nmetadata:\n  name: pod-cpu-hog\n  labels:\n    name: pod-cpu-hog\n    app.kubernetes.io/part-of: litmus\n    app.kubernetes.io/component: chaosexperiment\n    app.kubernetes.io/version: latest\nspec:\n  definition:\n    scope: Namespaced\n    permissions:\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods\n        verbs:\n          - create\n          - delete\n          - get\n          - list\n          - patch\n          - update\n          - deletecollection\n      - apiGroups:\n          - \"\"\n        resources:\n          - events\n        verbs:\n          - create\n          - get\n          - list\n          - patch\n          - update\n      - apiGroups:\n          - \"\"\n        resources:\n          - configmaps\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/log\n        verbs:\n          - get\n          - list\n          - watch\n      - apiGroups:\n          - \"\"\n        resources:\n          - pods/exec\n        verbs:\n          - get\n          - list\n          - create\n      - apiGroups:\n          - apps\n        resources:\n          - deployments\n          - statefulsets\n          - replicasets\n          - daemonsets\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - apps.openshift.io\n        resources:\n          - deploymentconfigs\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - \"\"\n        resources:\n          - replicationcontrollers\n        verbs:\n          - get\n          - list\n      - apiGroups:\n          - argoproj.io\n        resources:\n          - rollouts\n        verbs:\n          - list\n          - get\n      - apiGroups:\n          - batch\n        resources:\n          - jobs\n        verbs:\n          - create\n          - list\n          - get\n          - delete\n          - deletecollection\n      - apiGroups:\n          - litmuschaos.io\n        resources:\n          - chaosengines\n          - chaosexperiments\n          - chaosresults\n        verbs:\n          - create\n          - list\n          - get\n          - patch\n          - update\n          - delete\n    image: litmuschaos/go-runner:latest\n    imagePullPolicy: Always\n    args:\n      - -c\n      - ./experiments -name pod-cpu-hog\n    command:\n      - /bin/bash\n    env:\n      - name: TOTAL_CHAOS_DURATION\n        value: \"60\"\n      - name: CPU_CORES\n        value: \"1\"\n      - name: CPU_LOAD\n        value: \"100\"\n      - name: PODS_AFFECTED_PERC\n        value: \"\"\n      - name: RAMP_TIME\n        value: \"\"\n      - name: LIB_IMAGE\n        value: litmuschaos/go-runner:latest\n      - name: STRESS_IMAGE\n        value: alexeiled/stress-ng:latest-ubuntu\n      - name: CONTAINER_RUNTIME\n        value: containerd\n      - name: SOCKET_PATH\n        value: /run/containerd/containerd.sock\n      - name: TARGET_PODS\n        value: \"\"\n      - name: NODE_LABEL\n        value: \"\"\n      - name: SEQUENCE\n        value: parallel\n    labels:\n      name: pod-cpu-hog\n      app.kubernetes.io/part-of: litmus\n      app.kubernetes.io/component: experiment-job\n      app.kubernetes.io/runtime-api-usage: \"true\"\n      app.kubernetes.io/version: latest\n"
+                  }
+                }
+              ]
+            },
+            "name": "test11-1685615183[0].install-chaos-experiments",
+            "outputs": {
+              "exitCode": "0"
+            },
+            "phase": "Succeeded",
+            "progress": "1/1",
+            "resourcesDuration": {
+              "cpu": 61,
+              "memory": 61
+            },
+            "startedAt": "2023-06-01T10:26:49Z",
+            "templateName": "install-chaos-experiments",
+            "templateScope": "local/test11-1685615183",
+            "type": "Pod"
+          }
+        },
+        "phase": "Succeeded",
+        "progress": "3/3",
+        "resourcesDuration": {
+          "cpu": 188,
+          "memory": 188
+        },
+        "startedAt": "2023-06-01T10:26:49Z"
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
   }
 }
